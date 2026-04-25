@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumière Estética — Beleza que Transforma</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --cream:#faf7f2;
+  --dark:#1a1410;
+  --gold:#c9a96e;
+  --gold-light:#e8d5b0;
+  --gold-pale:#f5edd8;
+  --text:#3a2e24;
+  --text2:#7a6a58;
+  --white:#ffffff;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+
+/* CURSOR */
+*{cursor:none;}
+.cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.15s ease;opacity:0.6;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 60px;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s;}
+nav.scrolled{background:rgba(250,247,242,0.95);backdrop-filter:blur(12px);padding:18px 60px;border-bottom:1px solid rgba(201,169,110,0.2);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:4px;text-transform:uppercase;color:var(--dark);}
+.nav-logo span{color:var(--gold);}
+.nav-links{display:flex;gap:40px;list-style:none;}
+.nav-links a{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color 0.3s;position:relative;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{font-size:11px;letter-spacing:2px;text-transform:uppercase;border:1px solid var(--gold);color:var(--gold);padding:10px 24px;text-decoration:none;transition:all 0.3s;}
+.nav-cta:hover{background:var(--gold);color:var(--white);}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:140px 60px 80px 60px;position:relative;z-index:2;}
+.hero-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:32px;display:flex;align-items:center;gap:12px;}
+.hero-tag::before{content:'';width:40px;height:1px;background:var(--gold);}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(52px,5vw,80px);font-weight:300;line-height:1.05;color:var(--dark);margin-bottom:28px;}
+.hero-title em{font-style:italic;color:var(--gold);}
+.hero-subtitle{font-size:15px;line-height:1.8;color:var(--text2);max-width:420px;margin-bottom:48px;}
+.hero-btns{display:flex;gap:16px;align-items:center;}
+.btn-primary{background:var(--gold);color:var(--white);padding:16px 36px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all 0.3s;border:1px solid var(--gold);}
+.btn-primary:hover{background:transparent;color:var(--gold);}
+.btn-secondary{font-size:12px;letter-spacing:1px;color:var(--text2);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.3s;}
+.btn-secondary:hover{color:var(--gold);}
+.btn-secondary::after{content:'→';font-size:16px;}
+.hero-right{position:relative;overflow:hidden;}
+.hero-img{width:100%;height:100%;object-fit:cover;filter:sepia(15%) brightness(0.95);}
+.hero-img-placeholder{width:100%;height:100%;background:linear-gradient(135deg,#e8ddd0 0%,#d4c4a8 40%,#c8b48e 100%);display:flex;align-items:center;justify-content:center;position:relative;}
+.hero-img-placeholder::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a96e' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
+.hero-portrait{width:320px;height:420px;background:linear-gradient(180deg,#d4bfa0 0%,#c4a882 50%,#b89060 100%);border-radius:160px 160px 0 0;position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;}
+.hero-portrait::after{content:'✦';font-size:80px;color:rgba(255,255,255,0.15);position:absolute;top:40px;}
+.hero-stats{position:absolute;bottom:60px;left:60px;display:flex;gap:40px;}
+.stat-item{text-align:center;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:var(--dark);line-height:1;}
+.stat-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);margin-top:4px;}
+.hero-badge{position:absolute;top:60%;right:-20px;background:var(--white);padding:20px 28px;box-shadow:0 20px 60px rgba(0,0,0,0.08);}
+.hero-badge-text{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--text2);line-height:1.6;}
+.hero-badge-author{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-top:8px;}
+
+/* MARQUEE */
+.marquee-bar{background:var(--dark);padding:16px 0;overflow:hidden;}
+.marquee-track{display:flex;gap:60px;animation:marquee 20s linear infinite;white-space:nowrap;}
+.marquee-item{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);display:flex;align-items:center;gap:60px;}
+.marquee-item::after{content:'✦';color:var(--gold);font-size:8px;}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION BASE */
+section{padding:100px 60px;}
+.section-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:12px;}
+.section-tag::before{content:'';width:30px;height:1px;background:var(--gold);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:300;line-height:1.1;color:var(--dark);}
+.section-title em{font-style:italic;color:var(--gold);}
+
+/* SOBRE */
+.sobre{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.sobre-content{}
+.sobre-text{font-size:15px;line-height:1.9;color:var(--text2);margin-top:28px;margin-bottom:40px;}
+.sobre-features{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.feature-item{display:flex;align-items:flex-start;gap:12px;}
+.feature-icon{width:32px;height:32px;border:1px solid var(--gold-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;margin-top:2px;}
+.feature-text{font-size:13px;line-height:1.6;color:var(--text2);}
+.feature-text strong{display:block;font-weight:500;color:var(--text);font-size:14px;margin-bottom:2px;}
+.sobre-visual{position:relative;}
+.sobre-img-main{width:100%;aspect-ratio:3/4;background:linear-gradient(135deg,#e8ddd0,#c8b08a);display:flex;align-items:center;justify-content:center;font-size:48px;color:rgba(201,169,110,0.4);position:relative;overflow:hidden;}
+.sobre-img-main::before{content:'';position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(26,20,16,0.5),transparent);}
+.sobre-img-float{position:absolute;bottom:-30px;right:-30px;width:180px;height:220px;background:var(--gold-pale);border:8px solid var(--cream);display:flex;align-items:center;justify-content:center;font-size:32px;color:rgba(201,169,110,0.5);}
+.sobre-award{position:absolute;top:30px;left:-20px;background:var(--dark);color:var(--gold);padding:16px 20px;font-size:10px;letter-spacing:2px;text-transform:uppercase;text-align:center;line-height:1.8;}
+
+/* SERVIÇOS */
+.servicos{background:var(--dark);}
+.servicos .section-tag{color:var(--gold);}
+.servicos .section-title{color:var(--white);}
+.servicos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px;}
+.servico-card{background:#221c16;padding:48px 36px;transition:all 0.4s;position:relative;overflow:hidden;}
+.servico-card::before{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--gold);transition:width 0.4s;}
+.servico-card:hover{background:#2a2218;}
+.servico-card:hover::before{width:100%;}
+.servico-num{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:rgba(201,169,110,0.15);line-height:1;margin-bottom:24px;}
+.servico-icon{font-size:28px;margin-bottom:16px;display:block;}
+.servico-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--white);margin-bottom:12px;}
+.servico-desc{font-size:13px;line-height:1.8;color:#8a7a6a;margin-bottom:24px;}
+.servico-price{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;}
+.servico-price::before{content:'';width:20px;height:1px;background:var(--gold);}
+.servico-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;}
+.servico-tag{font-size:10px;letter-spacing:1px;border:1px solid #3a2e24;color:#6a5a48;padding:4px 10px;}
+
+/* RESULTADOS */
+.resultados{background:var(--gold-pale);}
+.resultados-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;}
+.resultados-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.resultado-card{background:var(--white);padding:32px;position:relative;overflow:hidden;transition:transform 0.3s;}
+.resultado-card:hover{transform:translateY(-6px);}
+.resultado-before-after{display:grid;grid-template-columns:1fr 1fr;gap:2px;aspect-ratio:1;margin-bottom:20px;font-size:11px;}
+.resultado-panel{display:flex;align-items:flex-end;justify-content:center;padding-bottom:12px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.8);}
+.resultado-panel.before{background:linear-gradient(180deg,#d4bfa0,#c4a882);}
+.resultado-panel.after{background:linear-gradient(180deg,#e8d5b0,#d4b884);}
+.resultado-tratamento{font-size:13px;font-weight:500;color:var(--text);margin-bottom:6px;}
+.resultado-detalhe{font-size:12px;color:var(--text2);line-height:1.5;}
+.resultado-estrelas{color:var(--gold);font-size:12px;margin-top:12px;}
+
+/* DEPOIMENTOS */
+.depoimentos{}
+.depoimentos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:60px;}
+.depo-card{padding:40px;border:1px solid rgba(201,169,110,0.2);position:relative;transition:border-color 0.3s;}
+.depo-card:hover{border-color:var(--gold);}
+.depo-quote{font-family:'Cormorant Garamond',serif;font-size:60px;color:var(--gold-light);line-height:0.8;margin-bottom:20px;}
+.depo-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;line-height:1.7;color:var(--text);margin-bottom:28px;}
+.depo-author{display:flex;align-items:center;gap:14px;}
+.depo-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--white);}
+.depo-name{font-size:13px;font-weight:500;color:var(--text);}
+.depo-info{font-size:11px;color:var(--text2);letter-spacing:1px;}
+.depo-stars{color:var(--gold);font-size:11px;margin-top:3px;}
+
+/* PROCESSO */
+.processo{background:var(--dark);color:var(--white);}
+.processo .section-title{color:var(--white);}
+.processo-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:60px;position:relative;}
+.processo-steps::before{content:'';position:absolute;top:32px;left:10%;right:10%;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);}
+.step{padding:20px 24px;text-align:center;}
+.step-num{width:64px;height:64px;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--gold);position:relative;background:var(--dark);}
+.step-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--white);margin-bottom:12px;}
+.step-desc{font-size:13px;line-height:1.7;color:#7a6a58;}
+
+/* CTA */
+.cta-section{background:linear-gradient(135deg,var(--gold) 0%,#b8924e 100%);padding:100px 60px;text-align:center;position:relative;overflow:hidden;}
+.cta-section::before{content:'✦';position:absolute;font-size:300px;color:rgba(255,255,255,0.05);top:50%;left:50%;transform:translate(-50%,-50%);}
+.cta-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.7);margin-bottom:20px;}
+.cta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,70px);font-weight:300;color:var(--white);margin-bottom:20px;line-height:1.1;}
+.cta-sub{font-size:15px;color:rgba(255,255,255,0.8);margin-bottom:48px;max-width:500px;margin-left:auto;margin-right:auto;}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.cta-btn-white{background:var(--white);color:var(--gold);padding:16px 40px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:500;transition:all 0.3s;}
+.cta-btn-white:hover{background:var(--dark);color:var(--white);}
+.cta-btn-outline{border:1px solid rgba(255,255,255,0.6);color:var(--white);padding:16px 40px;font-size:11px;letter-spacing:2px;text-transform:uppercase;text-decoration:none;transition:all 0.3s;}
+.cta-btn-outline:hover{background:rgba(255,255,255,0.1);}
+.cta-whatsapp{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:32px;font-size:13px;color:rgba(255,255,255,0.7);}
+
+/* FORM */
+.contato{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.contato-info{}
+.contato-info-items{margin-top:40px;display:flex;flex-direction:column;gap:24px;}
+.contato-info-item{display:flex;gap:16px;align-items:flex-start;}
+.contato-icon{width:40px;height:40px;border:1px solid var(--gold-light);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;}
+.contato-item-text{}
+.contato-item-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.contato-item-value{font-size:14px;color:var(--text);}
+.form{display:flex;flex-direction:column;gap:16px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{display:flex;flex-direction:column;gap:8px;}
+.form-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);}
+.form-input,.form-select,.form-textarea{background:transparent;border:1px solid rgba(201,169,110,0.25);padding:14px 18px;font-size:14px;color:var(--text);font-family:'Jost',sans-serif;font-weight:300;outline:none;transition:border-color 0.3s;width:100%;}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--gold);}
+.form-textarea{resize:vertical;min-height:100px;}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a96e' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(122,106,88,0.5);}
+.form-submit{background:var(--dark);color:var(--white);border:none;padding:16px 40px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-family:'Jost',sans-serif;cursor:none;transition:all 0.3s;align-self:flex-start;border:1px solid var(--dark);}
+.form-submit:hover{background:var(--gold);border-color:var(--gold);}
+
+/* FOOTER */
+footer{background:var(--dark);padding:60px;border-top:1px solid #2a2218;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:48px;}
+.footer-brand{}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;letter-spacing:4px;text-transform:uppercase;color:var(--white);margin-bottom:16px;}
+.footer-logo span{color:var(--gold);}
+.footer-desc{font-size:13px;line-height:1.8;color:#5a4a38;max-width:260px;}
+.footer-social{display:flex;gap:12px;margin-top:24px;}
+.social-btn{width:36px;height:36px;border:1px solid #3a2e24;display:flex;align-items:center;justify-content:center;font-size:14px;color:#5a4a38;transition:all 0.3s;}
+.social-btn:hover{border-color:var(--gold);color:var(--gold);}
+.footer-col-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-links a{font-size:13px;color:#5a4a38;text-decoration:none;transition:color 0.3s;}
+.footer-links a:hover{color:var(--gold);}
+.footer-bottom{border-top:1px solid #2a2218;padding-top:24px;display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:11px;color:#3a2e24;letter-spacing:1px;}
+.footer-made{font-size:11px;color:#3a2e24;}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-in{opacity:0;transition:opacity 0.8s ease;}
+.fade-in.visible{opacity:1;}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:20px 24px;}
+  nav.scrolled{padding:16px 24px;}
+  .nav-links,.nav-cta{display:none;}
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-left{padding:120px 24px 60px;}
+  .hero-right{height:400px;}
+  .hero-stats{left:24px;bottom:24px;gap:24px;}
+  .hero-badge{display:none;}
+  section{padding:70px 24px;}
+  .sobre,.contato{grid-template-columns:1fr;}
+  .sobre-visual{display:none;}
+  .servicos-grid{grid-template-columns:1fr;}
+  .resultados-grid{grid-template-columns:1fr 1fr;}
+  .resultados-header{flex-direction:column;gap:20px;align-items:flex-start;}
+  .depoimentos-grid{grid-template-columns:1fr;}
+  .processo-steps{grid-template-columns:1fr 1fr;}
+  .processo-steps::before{display:none;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center;}
+  .cta-section{padding:70px 24px;}
+  .form-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">Lumi<span>è</span>re</div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#resultados">Resultados</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="#contato" class="nav-cta">Agendar Avaliação</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-tag fade-up">Clínica de Estética Premium</div>
+    <h1 class="hero-title fade-up" style="transition-delay:0.1s">
+      Beleza que<br>
+      <em>transforma</em><br>
+      vidas
+    </h1>
+    <p class="hero-subtitle fade-up" style="transition-delay:0.2s">
+      Tratamentos estéticos de alta performance com tecnologia europeia e o cuidado que você merece. Resultados visíveis desde a primeira sessão.
+    </p>
+    <div class="hero-btns fade-up" style="transition-delay:0.3s">
+      <a href="#contato" class="btn-primary">Agendar Agora</a>
+      <a href="#resultados" class="btn-secondary">Ver Resultados</a>
+    </div>
+    <div class="hero-stats fade-up" style="transition-delay:0.4s">
+      <div class="stat-item">
+        <div class="stat-num">2.4k</div>
+        <div class="stat-label">Clientes</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">98%</div>
+        <div class="stat-label">Satisfação</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Anos</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-placeholder">
+      <div class="hero-portrait">
+        <div style="font-size:120px;opacity:0.3;position:absolute;top:60px;">✦</div>
+      </div>
+    </div>
+    <div class="hero-badge">
+      <div class="hero-badge-text">"A melhor decisão<br>que tomei para mim"</div>
+      <div class="hero-badge-author">— Ana Carolina, cliente desde 2021</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-bar">
+  <div class="marquee-track">
+    <span class="marquee-item">Harmonização Facial</span>
+    <span class="marquee-item">Botox Premium</span>
+    <span class="marquee-item">Limpeza de Pele</span>
+    <span class="marquee-item">Peeling Químico</span>
+    <span class="marquee-item">Laser CO₂</span>
+    <span class="marquee-item">Bioestimuladores</span>
+    <span class="marquee-item">Microagulhamento</span>
+    <span class="marquee-item">Preenchimento</span>
+    <span class="marquee-item">Harmonização Facial</span>
+    <span class="marquee-item">Botox Premium</span>
+    <span class="marquee-item">Limpeza de Pele</span>
+    <span class="marquee-item">Peeling Químico</span>
+    <span class="marquee-item">Laser CO₂</span>
+    <span class="marquee-item">Bioestimuladores</span>
+    <span class="marquee-item">Microagulhamento</span>
+    <span class="marquee-item">Preenchimento</span>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="sobre">
+    <div class="sobre-content">
+      <div class="section-tag fade-up">Nossa História</div>
+      <h2 class="section-title fade-up" style="transition-delay:0.1s">
+        Ciência e arte<br>a favor da sua <em>beleza</em>
+      </h2>
+      <p class="sobre-text fade-up" style="transition-delay:0.2s">
+        Fundada em 2016, a Lumière nasceu da paixão pela estética de alta performance. Nossa equipe de especialistas combina formação internacional com tecnologia de ponta para entregar resultados naturais e duradouros.
+      </p>
+      <div class="sobre-features fade-up" style="transition-delay:0.3s">
+        <div class="feature-item">
+          <div class="feature-icon">⚕</div>
+          <div class="feature-text"><strong>Equipe Médica</strong>Profissionais certificados com especialização internacional</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✦</div>
+          <div class="feature-text"><strong>Tecnologia Europeia</strong>Equipamentos de última geração importados</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">◈</div>
+          <div class="feature-text"><strong>Protocolos Exclusivos</strong>Tratamentos personalizados para cada perfil</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">◎</div>
+          <div class="feature-text"><strong>Ambiente Premium</strong>Espaço projetado para seu total conforto</div>
+        </div>
+      </div>
+    </div>
+    <div class="sobre-visual fade-in" style="transition-delay:0.2s">
+      <div class="sobre-img-main">
+        <span style="font-size:80px;opacity:0.2;">✦</span>
+        <div class="sobre-img-main::before"></div>
+      </div>
+      <div class="sobre-img-float">
+        <span>◈</span>
+      </div>
+      <div class="sobre-award">Melhor<br>Clínica<br>2024</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos" class="servicos">
+  <div class="section-tag fade-up">O que oferecemos</div>
+  <h2 class="section-title fade-up" style="transition-delay:0.1s;max-width:500px">
+    Tratamentos pensados<br>para <em>você</em>
+  </h2>
+  <div class="servicos-grid">
+    <div class="servico-card fade-up" style="transition-delay:0.1s">
+      <div class="servico-num">01</div>
+      <span class="servico-icon">◈</span>
+      <div class="servico-name">Harmonização Facial</div>
+      <div class="servico-desc">Realce sua beleza natural com preenchimentos e bioestimuladores de alta precisão. Resultados naturais e duradouros.</div>
+      <div class="servico-price">A partir de R$ 890</div>
+      <div class="servico-tags">
+        <span class="servico-tag">Ácido Hialurônico</span>
+        <span class="servico-tag">Bioestimulador</span>
+        <span class="servico-tag">Botox</span>
+      </div>
+    </div>
+    <div class="servico-card fade-up" style="transition-delay:0.2s">
+      <div class="servico-num">02</div>
+      <span class="servico-icon">✦</span>
+      <div class="servico-name">Rejuvenescimento</div>
+      <div class="servico-desc">Protocolos avançados com laser, radiofrequência e peeling para recuperar a juventude e o viço da sua pele.</div>
+      <div class="servico-price">A partir de R$ 650</div>
+      <div class="servico-tags">
+        <span class="servico-tag">Laser CO₂</span>
+        <span class="servico-tag">Radiofrequência</span>
+        <span class="servico-tag">Peeling</span>
+      </div>
+    </div>
+    <div class="servico-card fade-up" style="transition-delay:0.3s">
+      <div class="servico-num">03</div>
+      <span class="servico-icon">◎</span>
+      <div class="servico-name">Skincare Premium</div>
+      <div class="servico-desc">Limpeza profunda, hidratação intensa e tratamentos personalizados para cada tipo de pele com produtos importados.</div>
+      <div class="servico-price">A partir de R$ 280</div>
+      <div class="servico-tags">
+        <span class="servico-tag">Limpeza de Pele</span>
+        <span class="servico-tag">Microagulhamento</span>
+      </div>
+    </div>
+    <div class="servico-card fade-up" style="transition-delay:0.1s">
+      <div class="servico-num">04</div>
+      <span class="servico-icon">⬡</span>
+      <div class="servico-name">Corporal</div>
+      <div class="servico-desc">Modelagem corporal, redução de medidas e tratamentos para celulite e flacidez com tecnologia de ponta.</div>
+      <div class="servico-price">A partir de R$ 420</div>
+      <div class="servico-tags">
+        <span class="servico-tag">Criolipólise</span>
+        <span class="servico-tag">Ultrassom</span>
+      </div>
+    </div>
+    <div class="servico-card fade-up" style="transition-delay:0.2s">
+      <div class="servico-num">05</div>
+      <span class="servico-icon">◇</span>
+      <div class="servico-name">Cabelo & Couro Cabeludo</div>
+      <div class="servico-desc">Tratamentos capilares avançados para queda, volume e saúde dos fios com protocolos nutricionais exclusivos.</div>
+      <div class="servico-price">A partir de R$ 350</div>
+      <div class="servico-tags">
+        <span class="servico-tag">PRP</span>
+        <span class="servico-tag">Microagulhamento</span>
+      </div>
+    </div>
+    <div class="servico-card fade-up" style="transition-delay:0.3s">
+      <div class="servico-num">06</div>
+      <span class="servico-icon">❋</span>
+      <div class="servico-name">Pacotes VIP</div>
+      <div class="servico-desc">Programas completos de transformação com acompanhamento personalizado e resultados garantidos em 30 dias.</div>
+      <div class="servico-price">Consulte valores</div>
+      <div class="servico-tags">
+        <span class="servico-tag">Exclusivo</span>
+        <span class="servico-tag">Personalizado</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTADOS -->
+<section id="resultados" class="resultados">
+  <div class="resultados-header">
+    <div>
+      <div class="section-tag fade-up">Antes e Depois</div>
+      <h2 class="section-title fade-up" style="transition-delay:0.1s">
+        Resultados que<br><em>falam</em> por si
+      </h2>
+    </div>
+    <a href="#contato" class="btn-primary fade-up" style="transition-delay:0.2s;white-space:nowrap">Ver Todos os Casos</a>
+  </div>
+  <div class="resultados-grid">
+    <div class="resultado-card fade-up" style="transition-delay:0.1s">
+      <div class="resultado-before-after">
+        <div class="resultado-panel before">Antes</div>
+        <div class="resultado-panel after">Depois</div>
+      </div>
+      <div class="resultado-tratamento">Harmonização Facial</div>
+      <div class="resultado-detalhe">Preenchimento labial + contorno mandibular + lifting químico</div>
+      <div class="resultado-estrelas">★★★★★</div>
+    </div>
+    <div class="resultado-card fade-up" style="transition-delay:0.2s">
+      <div class="resultado-before-after">
+        <div class="resultado-panel before">Antes</div>
+        <div class="resultado-panel after" style="background:linear-gradient(180deg,#f0e0c0,#e8d0a0);">Depois</div>
+      </div>
+      <div class="resultado-tratamento">Rejuvenescimento</div>
+      <div class="resultado-detalhe">Protocolo Laser CO₂ + Peeling químico profundo</div>
+      <div class="resultado-estrelas">★★★★★</div>
+    </div>
+    <div class="resultado-card fade-up" style="transition-delay:0.3s">
+      <div class="resultado-before-after">
+        <div class="resultado-panel before">Antes</div>
+        <div class="resultado-panel after" style="background:linear-gradient(180deg,#ddd0b8,#cec0a0);">Depois</div>
+      </div>
+      <div class="resultado-tratamento">Bioestimulação</div>
+      <div class="resultado-detalhe">Sculptra + Radiofrequência facial em 4 sessões</div>
+      <div class="resultado-estrelas">★★★★★</div>
+    </div>
+    <div class="resultado-card fade-up" style="transition-delay:0.4s">
+      <div class="resultado-before-after">
+        <div class="resultado-panel before">Antes</div>
+        <div class="resultado-panel after" style="background:linear-gradient(180deg,#e8d8bc,#dcc8a4);">Depois</div>
+      </div>
+      <div class="resultado-tratamento">Corporal Completo</div>
+      <div class="resultado-detalhe">Criolipólise + Ultrassom focalizado em 6 sessões</div>
+      <div class="resultado-estrelas">★★★★★</div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos">
+  <div style="text-align:center;margin-bottom:0;">
+    <div class="section-tag fade-up" style="justify-content:center;">O que dizem</div>
+    <h2 class="section-title fade-up" style="transition-delay:0.1s;text-align:center">
+      Histórias de <em>transformação</em>
+    </h2>
+  </div>
+  <div class="depoimentos-grid">
+    <div class="depo-card fade-up" style="transition-delay:0.1s">
+      <div class="depo-quote">"</div>
+      <div class="depo-text">A Lumière mudou completamente minha autoestima. Os resultados foram naturais e exatamente o que eu esperava. A equipe é incrível e o ambiente é maravilhoso.</div>
+      <div class="depo-author">
+        <div class="depo-avatar">M</div>
+        <div>
+          <div class="depo-name">Mariana Ferreira</div>
+          <div class="depo-info">Harmonização Facial</div>
+          <div class="depo-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="depo-card fade-up" style="transition-delay:0.2s">
+      <div class="depo-quote">"</div>
+      <div class="depo-text">Fiz o pacote de rejuvenescimento e em 3 sessões já via diferença enorme. Minha pele ficou muito mais firme e iluminada. Recomendo demais!</div>
+      <div class="depo-author">
+        <div class="depo-avatar" style="background:linear-gradient(135deg,#d4a0c0,#c080a0);">C</div>
+        <div>
+          <div class="depo-name">Camila Rodrigues</div>
+          <div class="depo-info">Protocolo Laser</div>
+          <div class="depo-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div class="depo-card fade-up" style="transition-delay:0.3s">
+      <div class="depo-quote">"</div>
+      <div class="depo-text">Atendimento premium do início ao fim. Cada detalhe pensado com cuidado. Já indiquei para todas as minhas amigas e voltarei com certeza.</div>
+      <div class="depo-author">
+        <div class="depo-avatar" style="background:linear-gradient(135deg,#a0c0d4,#80a0c0);">J</div>
+        <div>
+          <div class="depo-name">Juliana Mendes</div>
+          <div class="depo-info">Pacote VIP Completo</div>
+          <div class="depo-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section class="processo">
+  <div style="text-align:center;">
+    <div class="section-tag fade-up" style="justify-content:center;">Como funciona</div>
+    <h2 class="section-title fade-up" style="transition-delay:0.1s;text-align:center">
+      Sua jornada de <em>transformação</em>
+    </h2>
+  </div>
+  <div class="processo-steps">
+    <div class="step fade-up" style="transition-delay:0.1s">
+      <div class="step-num">01</div>
+      <div class="step-name">Avaliação</div>
+      <div class="step-desc">Consulta gratuita com nossa especialista para entender seus objetivos e traçar o melhor protocolo.</div>
+    </div>
+    <div class="step fade-up" style="transition-delay:0.2s">
+      <div class="step-num">02</div>
+      <div class="step-name">Protocolo</div>
+      <div class="step-desc">Plano de tratamento personalizado com cronograma, procedimentos e resultados esperados.</div>
+    </div>
+    <div class="step fade-up" style="transition-delay:0.3s">
+      <div class="step-num">03</div>
+      <div class="step-name">Tratamento</div>
+      <div class="step-desc">Sessões realizadas com toda tecnologia e cuidado em ambiente premium e confortável.</div>
+    </div>
+    <div class="step fade-up" style="transition-delay:0.4s">
+      <div class="step-num">04</div>
+      <div class="step-name">Resultado</div>
+      <div class="step-desc">Acompanhamento pós-procedimento e manutenção para garantir resultados duradouros.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-tag fade-up">Comece hoje</div>
+  <h2 class="cta-title fade-up" style="transition-delay:0.1s">
+    Sua transformação<br>começa com uma<br>avaliação gratuita
+  </h2>
+  <p class="cta-sub fade-up" style="transition-delay:0.2s">Agende agora e ganhe uma análise de pele completa sem custo. Vagas limitadas.</p>
+  <div class="cta-btns fade-up" style="transition-delay:0.3s">
+    <a href="#contato" class="cta-btn-white">Agendar Avaliação Gratuita</a>
+    <a href="https://wa.me/5511999999999" class="cta-btn-outline">WhatsApp</a>
+  </div>
+  <div class="cta-whatsapp fade-up" style="transition-delay:0.4s">
+    ✦ Resposta em até 2 horas • Segunda a Sábado 8h–20h
+  </div>
+</div>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="contato">
+    <div class="contato-info">
+      <div class="section-tag fade-up">Fale conosco</div>
+      <h2 class="section-title fade-up" style="transition-delay:0.1s">
+        Agende sua<br><em>avaliação</em>
+      </h2>
+      <div class="contato-info-items fade-up" style="transition-delay:0.2s">
+        <div class="contato-info-item">
+          <div class="contato-icon">◎</div>
+          <div class="contato-item-text">
+            <div class="contato-item-label">Endereço</div>
+            <div class="contato-item-value">Av. Paulista, 1000 — Bela Vista, São Paulo</div>
+          </div>
+        </div>
+        <div class="contato-info-item">
+          <div class="contato-icon">◈</div>
+          <div class="contato-item-text">
+            <div class="contato-item-label">WhatsApp</div>
+            <div class="contato-item-value">(11) 99999-9999</div>
+          </div>
+        </div>
+        <div class="contato-info-item">
+          <div class="contato-icon">✦</div>
+          <div class="contato-item-text">
+            <div class="contato-item-label">Horário</div>
+            <div class="contato-item-value">Segunda a Sábado: 8h às 20h</div>
+          </div>
+        </div>
+        <div class="contato-info-item">
+          <div class="contato-icon">❋</div>
+          <div class="contato-item-text">
+            <div class="contato-item-label">Instagram</div>
+            <div class="contato-item-value">@lumiere.estetica</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up" style="transition-delay:0.2s">
+      <div class="form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome</label>
+            <input class="form-input" type="text" placeholder="Seu nome completo">
+          </div>
+          <div class="form-group">
+            <label class="form-label">WhatsApp</label>
+            <input class="form-input" type="tel" placeholder="(11) 99999-9999">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-mail</label>
+          <input class="form-input" type="email" placeholder="seu@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tratamento de Interesse</label>
+          <select class="form-select form-input">
+            <option value="">Selecione um tratamento</option>
+            <option>Harmonização Facial</option>
+            <option>Rejuvenescimento</option>
+            <option>Skincare Premium</option>
+            <option>Corporal</option>
+            <option>Pacote VIP</option>
+            <option>Não sei ainda — quero avaliação</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mensagem (opcional)</label>
+          <textarea class="form-textarea" placeholder="Conte um pouco sobre o que você busca..."></textarea>
+        </div>
+        <button class="form-submit" onclick="this.textContent='Enviado ✦';this.style.background='var(--gold)';this.style.borderColor='var(--gold)'">
+          Solicitar Avaliação Gratuita
+        </button>
+        <p style="font-size:11px;color:var(--text2);margin-top:8px;">Retornamos em até 2 horas via WhatsApp</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="footer-logo">Lumi<span>è</span>re</div>
+      <p class="footer-desc">Clínica de estética premium em São Paulo. Ciência, arte e cuidado para a sua melhor versão.</p>
+      <div class="footer-social">
+        <div class="social-btn">◈</div>
+        <div class="social-btn">✦</div>
+        <div class="social-btn">❋</div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Tratamentos</div>
+      <ul class="footer-links">
+        <li><a href="#">Harmonização Facial</a></li>
+        <li><a href="#">Rejuvenescimento</a></li>
+        <li><a href="#">Skincare</a></li>
+        <li><a href="#">Corporal</a></li>
+        <li><a href="#">Pacotes VIP</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Clínica</div>
+      <ul class="footer-links">
+        <li><a href="#">Sobre nós</a></li>
+        <li><a href="#">Nossa equipe</a></li>
+        <li><a href="#">Resultados</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Franquias</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contato</div>
+      <ul class="footer-links">
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Agendar Online</a></li>
+        <li><a href="#">Política de Privacidade</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2024 Lumière Estética. Todos os direitos reservados.</div>
+    <div class="footer-made" style="color:#3a2e24;">Site criado com ✦ por [Seu Nome]</div>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  }, 60);
+});
+document.querySelectorAll('a,button,.servico-card,.depo-card,.resultado-card').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.style.transform = 'translate(-50%,-50%) scale(1.8)');
+  el.addEventListener('mouseleave', () => ring.style.transform = 'translate(-50%,-50%) scale(1)');
+});
+
+// Navbar scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// Scroll animations
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-up,.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

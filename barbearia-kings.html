@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kings Barber Co. — O Corte que Define Você</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#0a0a08;
+  --dark:#111109;
+  --dark2:#1a1a16;
+  --dark3:#242420;
+  --amber:#d4820a;
+  --amber2:#f0a020;
+  --amber-pale:#fde68a;
+  --white:#f5f5f0;
+  --text:#c8c8bc;
+  --text2:#7a7a6a;
+  --red:#c0392b;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Barlow',sans-serif;font-weight:300;overflow-x:hidden;}
+
+/* NOISE TEXTURE */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:0.4;
+}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 64px;display:flex;align-items:center;justify-content:space-between;transition:all 0.4s;}
+nav.scrolled{background:rgba(10,10,8,0.95);backdrop-filter:blur(16px);padding:16px 64px;border-bottom:1px solid rgba(212,130,10,0.15);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;color:var(--white);}
+.nav-logo span{color:var(--amber);}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text2);text-decoration:none;transition:color 0.3s;}
+.nav-links a:hover{color:var(--amber);}
+.nav-tel{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;color:var(--amber);text-decoration:none;}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:55% 45%;position:relative;overflow:hidden;}
+.hero-bg-stripe{position:absolute;top:0;right:0;width:45%;height:100%;background:var(--dark2);clip-path:polygon(8% 0,100% 0,100% 100%,0 100%);}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:140px 64px 80px;position:relative;z-index:2;}
+.hero-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(212,130,10,0.12);border:1px solid rgba(212,130,10,0.3);padding:8px 16px;margin-bottom:36px;width:fit-content;}
+.hero-badge-dot{width:6px;height:6px;background:var(--amber);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero-badge-text{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(72px,9vw,140px);line-height:0.92;letter-spacing:2px;margin-bottom:28px;}
+.hero-title .line1{color:var(--white);}
+.hero-title .line2{color:var(--amber);-webkit-text-stroke:2px var(--amber);color:transparent;}
+.hero-title .line3{color:var(--white);}
+.hero-subtitle{font-size:15px;line-height:1.8;color:var(--text);max-width:400px;margin-bottom:48px;border-left:2px solid var(--amber);padding-left:20px;}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+.btn-amber{background:var(--amber);color:var(--black);padding:14px 32px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-weight:500;font-family:'Barlow',sans-serif;border:none;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;}
+.btn-amber:hover{background:var(--amber2);}
+.btn-ghost{border:1px solid rgba(255,255,255,0.2);color:var(--white);padding:14px 32px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-family:'Barlow',sans-serif;background:transparent;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-block;}
+.btn-ghost:hover{border-color:var(--amber);color:var(--amber);}
+.hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;padding:120px 40px 60px;}
+.hero-visual{position:relative;width:100%;}
+.hero-chair-bg{width:100%;aspect-ratio:3/4;background:linear-gradient(160deg,#2a2a20 0%,#1a1a12 60%,#0a0a08 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.hero-chair-bg::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(212,130,10,0.02) 40px,rgba(212,130,10,0.02) 41px);}
+.hero-chair-icon{font-size:120px;opacity:0.15;}
+.hero-float-card{position:absolute;bottom:40px;left:-40px;background:var(--dark3);border:1px solid rgba(212,130,10,0.2);padding:20px 24px;min-width:180px;}
+.hero-float-num{font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--amber);line-height:1;}
+.hero-float-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);margin-top:4px;}
+.hero-float-card2{position:absolute;top:60px;right:-20px;background:var(--amber);padding:16px 20px;text-align:center;}
+.hero-float-card2 .num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--black);line-height:1;}
+.hero-float-card2 .lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(0,0,0,0.6);}
+.hero-scroll{position:absolute;bottom:40px;left:64px;display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text2);}
+.hero-scroll::before{content:'';width:40px;height:1px;background:var(--text2);}
+
+/* MARQUEE */
+.marquee-wrap{background:var(--amber);padding:12px 0;overflow:hidden;}
+.marquee-inner{display:flex;gap:0;animation:slide 18s linear infinite;}
+.m-item{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:3px;color:var(--black);padding:0 32px;white-space:nowrap;display:flex;align-items:center;gap:32px;}
+.m-item::after{content:'✂';font-size:14px;}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SECTION */
+section{padding:100px 64px;}
+.s-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--amber);margin-bottom:16px;}
+.s-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,5vw,80px);line-height:0.95;letter-spacing:1px;}
+
+/* SOBRE */
+.sobre{background:var(--dark);}
+.sobre-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.sobre-visual{position:relative;}
+.sobre-main-img{width:100%;aspect-ratio:4/5;background:linear-gradient(160deg,#2a2218,#181410);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.sobre-main-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(212,130,10,0.15),transparent 50%);}
+.sobre-main-icon{font-size:100px;opacity:0.1;}
+.sobre-tag-img{position:absolute;top:-20px;right:-20px;background:var(--amber);padding:24px 20px;text-align:center;}
+.sobre-tag-img .big{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--black);line-height:1;}
+.sobre-tag-img .sm{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(0,0,0,0.6);}
+.sobre-stripe{position:absolute;bottom:-16px;left:20px;right:60px;height:4px;background:linear-gradient(to right,var(--amber),transparent);}
+.sobre-text{font-size:15px;line-height:1.9;color:var(--text);margin:24px 0 40px;}
+.sobre-items{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.sobre-item{background:var(--dark2);padding:20px;border-left:2px solid var(--amber);}
+.sobre-item-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--amber);}
+.sobre-item-label{font-size:11px;letter-spacing:1px;color:var(--text2);margin-top:2px;}
+
+/* SERVIÇOS */
+.servicos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;}
+.srv-card{background:var(--dark2);padding:40px 32px;position:relative;overflow:hidden;transition:all 0.4s;border-bottom:2px solid transparent;}
+.srv-card:hover{background:var(--dark3);border-bottom-color:var(--amber);}
+.srv-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(to right,var(--amber),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.4s;}
+.srv-card:hover::before{transform:scaleX(1);}
+.srv-emoji{font-size:32px;margin-bottom:20px;display:block;}
+.srv-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:var(--white);margin-bottom:10px;}
+.srv-desc{font-size:13px;line-height:1.8;color:var(--text2);margin-bottom:24px;}
+.srv-price{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--amber);letter-spacing:1px;}
+.srv-duration{font-size:11px;letter-spacing:1px;color:var(--text2);margin-top:4px;}
+
+/* AGENDA */
+.agenda{background:var(--dark);}
+.agenda-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.agenda-info{}
+.agenda-text{font-size:15px;line-height:1.8;color:var(--text);margin:24px 0 40px;}
+.horarios{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.horario-item{background:var(--dark2);padding:16px;border:1px solid var(--dark3);}
+.horario-dia{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:4px;}
+.horario-hora{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--white);letter-spacing:1px;}
+.agenda-form{background:var(--dark2);padding:40px;border:1px solid var(--dark3);position:relative;}
+.agenda-form::before{content:'AGENDE';position:absolute;top:-1px;left:40px;background:var(--amber);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:3px;padding:4px 14px;}
+.f-group{margin-bottom:20px;}
+.f-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text2);display:block;margin-bottom:8px;}
+.f-input,.f-select{width:100%;background:var(--dark3);border:1px solid rgba(255,255,255,0.06);padding:12px 16px;color:var(--white);font-family:'Barlow',sans-serif;font-size:14px;outline:none;transition:border-color 0.3s;}
+.f-input:focus,.f-select:focus{border-color:var(--amber);}
+.f-input::placeholder{color:var(--text2);}
+.f-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23d4820a' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+/* BARBEIROS */
+.barbeiros{background:var(--black);}
+.barbeiros-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px;}
+.barb-card{position:relative;overflow:hidden;group;}
+.barb-photo{width:100%;aspect-ratio:3/4;background:linear-gradient(160deg,#2a2218,#111108);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.barb-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--black) 0%,transparent 50%);transition:opacity 0.4s;}
+.barb-card:hover .barb-photo::after{opacity:0.6;}
+.barb-icon{font-size:60px;opacity:0.1;}
+.barb-info{position:absolute;bottom:0;left:0;right:0;padding:28px;transform:translateY(0);}
+.barb-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--white);}
+.barb-role{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-top:4px;}
+.barb-exp{font-size:12px;color:var(--text2);margin-top:6px;}
+.barb-socials{display:flex;gap:10px;margin-top:12px;}
+.barb-social{width:28px;height:28px;background:rgba(212,130,10,0.15);border:1px solid rgba(212,130,10,0.3);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--amber);transition:all 0.3s;}
+.barb-social:hover{background:var(--amber);color:var(--black);}
+
+/* DEPOIMENTOS */
+.depo{background:var(--dark);}
+.depo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;}
+.depo-card{background:var(--dark2);padding:36px 32px;position:relative;transition:background 0.3s;}
+.depo-card:hover{background:var(--dark3);}
+.depo-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;}
+.depo-avatar{width:48px;height:48px;background:var(--amber);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--black);}
+.depo-stars{color:var(--amber);font-size:13px;letter-spacing:2px;}
+.depo-text{font-size:14px;line-height:1.8;color:var(--text);font-style:italic;margin-bottom:20px;border-left:2px solid var(--dark3);padding-left:16px;}
+.depo-card:hover .depo-text{border-left-color:var(--amber);}
+.depo-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--white);}
+.depo-service{font-size:11px;letter-spacing:1px;color:var(--text2);}
+
+/* CTA */
+.cta-bar{background:var(--amber);padding:80px 64px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:40px;}
+.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);line-height:0.95;letter-spacing:2px;color:var(--black);}
+.cta-sub{font-size:14px;color:rgba(0,0,0,0.6);margin-top:12px;}
+.cta-actions{display:flex;flex-direction:column;gap:12px;align-items:flex-end;}
+.btn-dark{background:var(--black);color:var(--white);padding:16px 40px;font-size:11px;letter-spacing:3px;text-transform:uppercase;font-family:'Barlow',sans-serif;border:none;cursor:pointer;text-decoration:none;display:inline-block;white-space:nowrap;transition:background 0.3s;}
+.btn-dark:hover{background:#1a1a16;}
+.cta-wpp{font-size:12px;color:rgba(0,0,0,0.5);letter-spacing:1px;}
+
+/* FOOTER */
+footer{background:var(--dark);padding:64px;border-top:1px solid var(--dark2);}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.f-logo{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:4px;color:var(--white);margin-bottom:12px;}
+.f-logo span{color:var(--amber);}
+.f-desc{font-size:13px;line-height:1.8;color:var(--text2);max-width:240px;}
+.f-socials{display:flex;gap:10px;margin-top:20px;}
+.f-social{width:36px;height:36px;border:1px solid var(--dark3);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--text2);transition:all 0.3s;}
+.f-social:hover{border-color:var(--amber);color:var(--amber);}
+.f-col-title{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:20px;}
+.f-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.f-list a{font-size:13px;color:var(--text2);text-decoration:none;transition:color 0.3s;}
+.f-list a:hover{color:var(--amber);}
+.footer-bottom{border-top:1px solid var(--dark2);padding-top:28px;display:flex;justify-content:space-between;align-items:center;}
+.f-copy{font-size:11px;color:#3a3a30;letter-spacing:1px;}
+
+/* ANIMATIONS */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:20px 24px;}
+  nav.scrolled{padding:14px 24px;}
+  .nav-links,.nav-tel{display:none;}
+  .hero{grid-template-columns:1fr;min-height:auto;}
+  .hero-bg-stripe{display:none;}
+  .hero-left{padding:120px 24px 60px;}
+  .hero-right{padding:20px 24px 60px;}
+  section{padding:70px 24px;}
+  .sobre-inner,.agenda-inner,.cta-bar{grid-template-columns:1fr;}
+  .sobre-visual{display:none;}
+  .servicos-grid,.barbeiros-grid,.depo-grid{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:1fr 1fr;}
+  .footer-bottom{flex-direction:column;gap:12px;text-align:center;}
+  .cta-bar{padding:60px 24px;}
+  .cta-actions{align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Kings<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#barbeiros">Barbeiros</a></li>
+    <li><a href="#agenda">Agendar</a></li>
+  </ul>
+  <a href="tel:+5511999999999" class="nav-tel">(11) 9 9999-9999</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-stripe"></div>
+  <div class="hero-left">
+    <div class="hero-badge reveal">
+      <div class="hero-badge-dot"></div>
+      <span class="hero-badge-text">Aberto hoje · 9h às 21h</span>
+    </div>
+    <h1 class="hero-title">
+      <div class="line1 reveal" style="transition-delay:0.1s">O CORTE</div>
+      <div class="line2 reveal" style="transition-delay:0.2s">CERTO</div>
+      <div class="line3 reveal" style="transition-delay:0.3s">DEFINE TUDO.</div>
+    </h1>
+    <p class="hero-subtitle reveal" style="transition-delay:0.4s">
+      Barbearia premium no coração de São Paulo. Cortes clássicos, modernos e personalizados com os melhores profissionais da cidade.
+    </p>
+    <div class="hero-btns reveal" style="transition-delay:0.5s">
+      <a href="#agenda" class="btn-amber">Agendar Corte</a>
+      <a href="#servicos" class="btn-ghost">Ver Serviços</a>
+    </div>
+    <div class="hero-scroll">Scroll para explorar</div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-visual reveal" style="transition-delay:0.2s">
+      <div class="hero-chair-bg">
+        <div class="hero-chair-icon">✂</div>
+      </div>
+      <div class="hero-float-card">
+        <div class="hero-float-num">1.8k</div>
+        <div class="hero-float-label">Clientes mensais</div>
+      </div>
+      <div class="hero-float-card2">
+        <div class="num">4.9</div>
+        <div class="lbl">Avaliação</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span class="m-item">Corte Clássico</span>
+    <span class="m-item">Barba Completa</span>
+    <span class="m-item">Degradê</span>
+    <span class="m-item">Hot Towel</span>
+    <span class="m-item">Sobrancelha</span>
+    <span class="m-item">Pigmentação</span>
+    <span class="m-item">Relaxamento</span>
+    <span class="m-item">Corte + Barba</span>
+    <span class="m-item">Corte Clássico</span>
+    <span class="m-item">Barba Completa</span>
+    <span class="m-item">Degradê</span>
+    <span class="m-item">Hot Towel</span>
+    <span class="m-item">Sobrancelha</span>
+    <span class="m-item">Pigmentação</span>
+    <span class="m-item">Relaxamento</span>
+    <span class="m-item">Corte + Barba</span>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section id="sobre" class="sobre">
+  <div class="sobre-inner">
+    <div class="sobre-visual">
+      <div class="sobre-main-img">
+        <div class="sobre-main-icon">✂</div>
+      </div>
+      <div class="sobre-tag-img">
+        <div class="big">12</div>
+        <div class="sm">Anos de<br>história</div>
+      </div>
+      <div class="sobre-stripe"></div>
+    </div>
+    <div>
+      <div class="s-tag reveal">Nossa história</div>
+      <h2 class="s-title reveal" style="transition-delay:0.1s">TRADIÇÃO<br>& ESTILO</h2>
+      <p class="sobre-text reveal" style="transition-delay:0.2s">
+        A Kings Barber Co. nasceu em 2012 com uma missão simples: entregar o melhor corte da cidade. Hoje somos referência em São Paulo, com uma equipe de barbeiros premiados e um ambiente que combina tradição com modernidade.
+      </p>
+      <div class="sobre-items reveal" style="transition-delay:0.3s">
+        <div class="sobre-item">
+          <div class="sobre-item-num">+15k</div>
+          <div class="sobre-item-label">Cortes por ano</div>
+        </div>
+        <div class="sobre-item">
+          <div class="sobre-item-num">8</div>
+          <div class="sobre-item-label">Barbeiros especialistas</div>
+        </div>
+        <div class="sobre-item">
+          <div class="sobre-item-num">4.9★</div>
+          <div class="sobre-item-label">Nota no Google</div>
+        </div>
+        <div class="sobre-item">
+          <div class="sobre-item-num">3x</div>
+          <div class="sobre-item-label">Premiada em SP</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="s-tag reveal">O que fazemos</div>
+  <h2 class="s-title reveal" style="transition-delay:0.1s">SERVIÇOS<br>& PREÇOS</h2>
+  <div class="servicos-grid">
+    <div class="srv-card reveal" style="transition-delay:0.1s">
+      <span class="srv-emoji">✂</span>
+      <div class="srv-name">Corte Clássico</div>
+      <div class="srv-desc">Tesoura ou máquina com acabamento perfeito. Para o homem que valoriza um visual clean e atemporal.</div>
+      <div class="srv-price">R$ 55</div>
+      <div class="srv-duration">⏱ 30 minutos</div>
+    </div>
+    <div class="srv-card reveal" style="transition-delay:0.15s">
+      <span class="srv-emoji">🪒</span>
+      <div class="srv-name">Barba Completa</div>
+      <div class="srv-desc">Modelagem, hot towel, navalha e finalização com produtos premium importados. Uma experiência única.</div>
+      <div class="srv-price">R$ 50</div>
+      <div class="srv-duration">⏱ 40 minutos</div>
+    </div>
+    <div class="srv-card reveal" style="transition-delay:0.2s">
+      <span class="srv-emoji">⚡</span>
+      <div class="srv-name">Corte + Barba</div>
+      <div class="srv-desc">O combo mais pedido. Transformação completa com corte personalizado e barba impecável.</div>
+      <div class="srv-price">R$ 95</div>
+      <div class="srv-duration">⏱ 60 minutos</div>
+    </div>
+    <div class="srv-card reveal" style="transition-delay:0.1s">
+      <span class="srv-emoji">🎨</span>
+      <div class="srv-name">Degradê Premium</div>
+      <div class="srv-desc">Técnica especializada em fade e degradê. Do skin fade ao high fade, feito por mãos experientes.</div>
+      <div class="srv-price">R$ 70</div>
+      <div class="srv-duration">⏱ 45 minutos</div>
+    </div>
+    <div class="srv-card reveal" style="transition-delay:0.15s">
+      <span class="srv-emoji">💆</span>
+      <div class="srv-name">Ritual Completo</div>
+      <div class="srv-desc">Corte + barba + sobrancelha + hidratação facial. Para quem quer o cuidado total em uma visita.</div>
+      <div class="srv-price">R$ 140</div>
+      <div class="srv-duration">⏱ 90 minutos</div>
+    </div>
+    <div class="srv-card reveal" style="transition-delay:0.2s">
+      <span class="srv-emoji">👑</span>
+      <div class="srv-name">VIP Kings</div>
+      <div class="srv-desc">Atendimento exclusivo com drink, ambiente reservado e o melhor barbeiro disponível. Sob agendamento.</div>
+      <div class="srv-price">R$ 200</div>
+      <div class="srv-duration">⏱ 2 horas</div>
+    </div>
+  </div>
+</section>
+
+<!-- BARBEIROS -->
+<section id="barbeiros" class="barbeiros">
+  <div class="s-tag reveal">Nossa equipe</div>
+  <h2 class="s-title reveal" style="transition-delay:0.1s">OS MELHORES<br>DA CIDADE</h2>
+  <div class="barbeiros-grid">
+    <div class="barb-card reveal" style="transition-delay:0.1s">
+      <div class="barb-photo">
+        <div class="barb-icon">✂</div>
+      </div>
+      <div class="barb-info">
+        <div class="barb-name">Marcus Silva</div>
+        <div class="barb-role">Master Barber</div>
+        <div class="barb-exp">12 anos de experiência · Especialista em Fade</div>
+        <div class="barb-socials">
+          <div class="barb-social">◈</div>
+          <div class="barb-social">✦</div>
+        </div>
+      </div>
+    </div>
+    <div class="barb-card reveal" style="transition-delay:0.2s">
+      <div class="barb-photo" style="background:linear-gradient(160deg,#221c12,#0e0e08);">
+        <div class="barb-icon">🪒</div>
+      </div>
+      <div class="barb-info">
+        <div class="barb-name">Rafael Costa</div>
+        <div class="barb-role">Senior Barber</div>
+        <div class="barb-exp">8 anos · Especialista em Barba</div>
+        <div class="barb-socials">
+          <div class="barb-social">◈</div>
+          <div class="barb-social">✦</div>
+        </div>
+      </div>
+    </div>
+    <div class="barb-card reveal" style="transition-delay:0.3s">
+      <div class="barb-photo" style="background:linear-gradient(160deg,#1c1c14,#0a0a06);">
+        <div class="barb-icon">⚡</div>
+      </div>
+      <div class="barb-info">
+        <div class="barb-name">Diego Alves</div>
+        <div class="barb-role">Style Barber</div>
+        <div class="barb-exp">6 anos · Especialista em Coloração</div>
+        <div class="barb-socials">
+          <div class="barb-social">◈</div>
+          <div class="barb-social">✦</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos" class="depo">
+  <div class="s-tag reveal">O que falam</div>
+  <h2 class="s-title reveal" style="transition-delay:0.1s">CLIENTES<br>SATISFEITOS</h2>
+  <div class="depo-grid">
+    <div class="depo-card reveal" style="transition-delay:0.1s">
+      <div class="depo-top">
+        <div class="depo-avatar">R</div>
+        <div class="depo-stars">★★★★★</div>
+      </div>
+      <p class="depo-text">"Melhor barbearia que já frequentei. O Marcus tem uma habilidade surreal com a tesoura. Chego com uma foto e saio igualzinho. Recomendo demais!"</p>
+      <div class="depo-name">Roberto Almeida</div>
+      <div class="depo-service">Corte Clássico + Barba</div>
+    </div>
+    <div class="depo-card reveal" style="transition-delay:0.2s">
+      <div class="depo-top">
+        <div class="depo-avatar" style="background:#8b6914;">T</div>
+        <div class="depo-stars">★★★★★</div>
+      </div>
+      <p class="depo-text">"Ambiente incrível, atendimento top e o resultado é sempre impecável. Já indiquei para todos os amigos. A Kings é referência total."</p>
+      <div class="depo-name">Thiago Mendes</div>
+      <div class="depo-service">Degradê Premium</div>
+    </div>
+    <div class="depo-card reveal" style="transition-delay:0.3s">
+      <div class="depo-top">
+        <div class="depo-avatar" style="background:#6b4a0a;">F</div>
+        <div class="depo-stars">★★★★★</div>
+      </div>
+      <p class="depo-text">"Fiz o Ritual Completo e saí de lá me sentindo outra pessoa. A experiência do hot towel é incrível. Vale cada centavo, sem dúvida alguma."</p>
+      <div class="depo-name">Felipe Santos</div>
+      <div class="depo-service">Ritual Completo VIP</div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDA -->
+<section id="agenda" class="agenda">
+  <div class="agenda-inner">
+    <div class="agenda-info">
+      <div class="s-tag reveal">Reserve seu horário</div>
+      <h2 class="s-title reveal" style="transition-delay:0.1s">AGENDE<br>ONLINE</h2>
+      <p class="agenda-text reveal" style="transition-delay:0.2s">
+        Sem fila, sem espera. Agende seu horário online e chegue na hora certa para o seu corte. Confirmação via WhatsApp em minutos.
+      </p>
+      <div class="horarios reveal" style="transition-delay:0.3s">
+        <div class="horario-item">
+          <div class="horario-dia">Seg — Sex</div>
+          <div class="horario-hora">9H — 21H</div>
+        </div>
+        <div class="horario-item">
+          <div class="horario-dia">Sábado</div>
+          <div class="horario-hora">8H — 20H</div>
+        </div>
+        <div class="horario-item">
+          <div class="horario-dia">Domingo</div>
+          <div class="horario-hora">9H — 18H</div>
+        </div>
+        <div class="horario-item">
+          <div class="horario-dia">Feriados</div>
+          <div class="horario-hora">10H — 17H</div>
+        </div>
+      </div>
+    </div>
+    <div class="agenda-form reveal" style="transition-delay:0.2s">
+      <div class="f-grid">
+        <div class="f-group">
+          <label class="f-label">Nome</label>
+          <input class="f-input" type="text" placeholder="Seu nome">
+        </div>
+        <div class="f-group">
+          <label class="f-label">WhatsApp</label>
+          <input class="f-input" type="tel" placeholder="(11) 99999-9999">
+        </div>
+      </div>
+      <div class="f-group">
+        <label class="f-label">Serviço</label>
+        <select class="f-select">
+          <option value="">Escolha o serviço</option>
+          <option>Corte Clássico — R$ 55</option>
+          <option>Barba Completa — R$ 50</option>
+          <option>Corte + Barba — R$ 95</option>
+          <option>Degradê Premium — R$ 70</option>
+          <option>Ritual Completo — R$ 140</option>
+          <option>VIP Kings — R$ 200</option>
+        </select>
+      </div>
+      <div class="f-grid">
+        <div class="f-group">
+          <label class="f-label">Data</label>
+          <input class="f-input" type="date">
+        </div>
+        <div class="f-group">
+          <label class="f-label">Barbeiro</label>
+          <select class="f-select">
+            <option>Sem preferência</option>
+            <option>Marcus Silva</option>
+            <option>Rafael Costa</option>
+            <option>Diego Alves</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-amber" style="width:100%;text-align:center;border:none;padding:16px;font-size:12px;letter-spacing:3px;cursor:pointer;margin-top:8px;" onclick="this.textContent='AGENDADO ✓';this.style.background='#2a8a2a';">CONFIRMAR AGENDAMENTO</button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-bar">
+  <div>
+    <h2 class="cta-title reveal">VENHA CONHECER<br>A KINGS.</h2>
+    <p class="cta-sub reveal" style="transition-delay:0.1s">Rua das Barbearias, 247 · Vila Madalena · São Paulo</p>
+  </div>
+  <div class="cta-actions reveal" style="transition-delay:0.2s">
+    <a href="#agenda" class="btn-dark">Agendar Agora</a>
+    <span class="cta-wpp">✂ WhatsApp: (11) 9 9999-9999</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="f-logo">Kings<span>.</span></div>
+      <p class="f-desc">Barbearia premium em São Paulo desde 2012. Corte, barba e estilo com os melhores profissionais.</p>
+      <div class="f-socials">
+        <div class="f-social">◈</div>
+        <div class="f-social">✦</div>
+        <div class="f-social">❋</div>
+      </div>
+    </div>
+    <div>
+      <div class="f-col-title">Serviços</div>
+      <ul class="f-list">
+        <li><a href="#">Corte Clássico</a></li>
+        <li><a href="#">Barba Completa</a></li>
+        <li><a href="#">Degradê</a></li>
+        <li><a href="#">Ritual Completo</a></li>
+        <li><a href="#">VIP Kings</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Barbearia</div>
+      <ul class="f-list">
+        <li><a href="#">Nossa história</a></li>
+        <li><a href="#">Barbeiros</a></li>
+        <li><a href="#">Galeria</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-col-title">Contato</div>
+      <ul class="f-list">
+        <li><a href="#">Agendar Online</a></li>
+        <li><a href="#">WhatsApp</a></li>
+        <li><a href="#">Instagram</a></li>
+        <li><a href="#">Localização</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="f-copy">© 2024 Kings Barber Co. Todos os direitos reservados.</div>
+    <div class="f-copy">Site criado por [Seu Nome]</div>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',scrollY>50);
+});
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
